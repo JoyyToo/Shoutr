@@ -4,5 +4,5 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
   # associations
-  has_many :shouts, dependent: :destroy
+  has_many :shouts, -> { descending }, dependent: :destroy
 end

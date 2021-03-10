@@ -5,4 +5,9 @@ class Shout < ApplicationRecord
 
   # associations
   belongs_to :user
+
+  # scopes
+  scope :descending, -> { order(created_at: :desc) }
+
+  delegate :username, to: :user
 end
