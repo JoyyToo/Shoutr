@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
 
   # associations
-  has_many :shouts, -> { descending }, dependent: :destroy
+  has_many :shouts, dependent: :destroy
   has_many :likes
   has_many :liked_shouts, through: :likes, source: :shout
 
@@ -36,6 +36,10 @@ class User < ApplicationRecord
 
   def following?(user)
     followed_user_ids.include? user.id
+  end
+
+  def timeline_shouts
+    Shout.where(user_id: followed_user_ids + [id])
   end
 
   def to_param

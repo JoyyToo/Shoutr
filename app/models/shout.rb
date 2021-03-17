@@ -7,7 +7,7 @@ class Shout < ApplicationRecord
   belongs_to :content, polymorphic: true
 
   # scopes
-  scope :descending, -> { order(created_at: :desc) }
+  default_scope { order(created_at: :desc) }
 
   delegate :username, to: :user
 end
